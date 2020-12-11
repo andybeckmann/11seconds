@@ -1,7 +1,3 @@
 # 11seconds
 
-- Breathing Visualized
-
-## Why?
-
 11seconds (11s) is an app for visualizing breathing techniques that can alter how stress affects the human body on a biological level.
