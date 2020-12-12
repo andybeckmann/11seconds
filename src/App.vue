@@ -5,7 +5,7 @@
 		<div v-if="this.modeB.active == true" class="app--bubble modeB"></div>
 		<div v-if="this.modeC.active == true" class="app--bubble modeC"></div>
 		<div class="app--controls" v-if="this.controlStatus == 'Reset'" @click="timerStop">{{ this.controlStatus }}</div>
-		<div class="app--controls" v-if="this.controlStatus == 'Pick A Duration'" @click="selectTimeInterval('B')">{{ this.controlStatus }}</div>
+		<div class="app--controls" v-if="this.controlStatus == 'Select A Duration'" @click="selectTimeInterval('B')">{{ this.controlStatus }}</div>
 		<div class="app--modes">
 			<ul>
 				<li @click="selectTimeInterval('A')" :class="{ 'active' : modeA.active }">10s</li>
@@ -58,7 +58,7 @@ export default {
 			this.modeC.active = false
 			clearInterval(this.interval)
 			this.clock = null
-			this.controlStatus = 'Pick A Duration'
+			this.controlStatus = 'Select A Duration'
 		},
 
 		timerReset(newCount) {
@@ -107,7 +107,7 @@ export default {
 	data() {
 		return {
 			clock: null,
-			controlStatus: 'Pick A Duration',
+			controlStatus: 'Select A Duration',
 			breathStatus: '',
 			modeA: {
 				active: false
@@ -156,13 +156,14 @@ export default {
 		font-family: 'Montserrat-Light', sans-serif;
 		padding: 0;
 		margin: 0;
+		background: #effbff;
 	}
 
 	// App
 	#app {
 		background: #fff;
 		height: 100vh;
-		width: 100%;
+		max-width: 960px;
 		margin: 0 auto;
 		position: relative;
 	}

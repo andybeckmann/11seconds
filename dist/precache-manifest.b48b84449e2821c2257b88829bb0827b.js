@@ -1,7 +1,7 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cd97f26b73f238c17a13",
-    "url": "/css/app.8ebbdbe1.css"
+    "revision": "9982ec0d0229089b2e6c",
+    "url": "/css/app.c1394abf.css"
   },
   {
     "revision": "82ad9d60ba7ebdf248949baee8b8886a",
@@ -16,12 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/fonts/Montserrat-Light.409c7f79.ttf"
   },
   {
-    "revision": "3076ec8c7fb611fa04859977c811ee9f",
+    "revision": "b90385949675c5e0a02c47ddb46bc559",
+    "url": "/img/favicon.png"
+  },
+  {
+    "revision": "b55497a37265c6f9d8045069438f0bb6",
     "url": "/index.html"
   },
   {
-    "revision": "cd97f26b73f238c17a13",
-    "url": "/js/app.da09258f.js"
+    "revision": "9982ec0d0229089b2e6c",
+    "url": "/js/app.6dc43568.js"
   },
   {
     "revision": "80e046b767afd407ecb8",
