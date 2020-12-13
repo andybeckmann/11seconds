@@ -100,10 +100,6 @@ export default {
 		}
 	},
 
-	created() {
-		//this.timerStart(11)
-	},
-
 	data() {
 		return {
 			clock: null,
