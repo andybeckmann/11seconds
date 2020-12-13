@@ -5,8 +5,8 @@
 		<div v-if="this.modeB.active == true" class="app--bubble modeB"></div>
 		<div v-if="this.modeC.active == true" class="app--bubble modeC"></div>
 		<div class="app--controls" v-if="this.controlStatus == 'Reset'" @click="timerStop">{{ this.controlStatus }}</div>
-		<div class="app--controls" v-if="this.controlStatus == 'Select A Duration'" @click="selectTimeInterval('B')">{{ this.controlStatus }}</div>
-		<div class="app--modes">
+		<div class="app--controls start" v-if="this.controlStatus == 'Select A Duration'" @click="selectTimeInterval('B')" >{{ this.controlStatus }}</div>
+		<div class="app--modes" :class="{ 'start' : this.controlStatus == 'Select A Duration' }">
 			<ul>
 				<li @click="selectTimeInterval('A')" :class="{ 'active' : modeA.active }">10s</li>
 				<li @click="selectTimeInterval('B')" :class="{ 'active' : modeB.active }">11s</li>
@@ -52,7 +52,7 @@ export default {
 					reachedEnd = false;
 					this.breathStatus = 'Inhale'
 				}
-			}, 1000)
+			}, 100)
 		},
 
 		timerStop() {
@@ -280,6 +280,10 @@ export default {
 		bottom: 185px;
 		left: 0;
 		cursor: pointer;
+
+		&.start {
+			bottom: 60vh;
+		}
 	}
 
 	// App: Modes
@@ -292,6 +296,10 @@ export default {
 		width: calc(100% - 50px);
 		background: #effbff;
 		border-radius: 25px;
+
+		&.start {
+			bottom: 40vh;
+		}
 	
 		ul {
 			margin: 0;
@@ -325,7 +333,6 @@ export default {
 		position: absolute;
 		bottom: 25px;
 		left: 15px;
-		content: 'in';
 		text-transform: uppercase;
 		color: #116394;
 		font-size: 28px;
