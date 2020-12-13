@@ -34,6 +34,8 @@ export default {
 			let midPoint = (selectedTime/2).toFixed(2)
 			let i = 0.00
 			let reachedEnd = false
+			this.breathStatus = 'Inhale'
+			this.clock = 0.00.toFixed(2)
 			this.interval = setInterval(() => {
 				if (i.toFixed(2) == midPoint) {
 					reachedEnd = true
@@ -44,12 +46,13 @@ export default {
 				} else {
 					i -= 0.10
 				}
-				this.clock = i.toFixed(2)
-				if (i.toFixed(2) - 0.10 == 0.00) {
+				this.clock = Math.abs(i).toFixed(2)
+				if (i.toFixed(2) == 0) {
+					this.clock = 0.00.toFixed(2)
 					reachedEnd = false;
 					this.breathStatus = 'Inhale'
 				}
-			}, 100)
+			}, 1000)
 		},
 
 		timerStop() {
@@ -169,7 +172,7 @@ export default {
 		background: #00ffaf;
 		height: 80px;
 		color: #074367;
-		text-align: center;
+		padding-left: calc(50% - 25px);
 		padding-top: 26px;
 		font-size: 24px;
 	}
@@ -276,6 +279,7 @@ export default {
 		margin: 25px 0;
 		bottom: 185px;
 		left: 0;
+		cursor: pointer;
 	}
 
 	// App: Modes
