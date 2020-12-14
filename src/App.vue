@@ -309,7 +309,7 @@ export default {
 			justify-content: space-between;
 
 			li {
-				display: inline;
+				display: block;
 				font-size: 30px;
 				line-height: 10px;
 				padding: 25px 15px;
