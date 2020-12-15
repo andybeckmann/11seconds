@@ -4,6 +4,7 @@
 		<div v-if="this.modeA.active == true" class="app--bubble modeA"></div>
 		<div v-if="this.modeB.active == true" class="app--bubble modeB"></div>
 		<div v-if="this.modeC.active == true" class="app--bubble modeC"></div>
+		<div v-if="this.countdown.active == true" class="app--countdown">{{ this.countdown.value }}</div>
 		<div class="app--controls" v-if="this.controlStatus == 'Reset'" @click="timerStop">{{ this.controlStatus }}</div>
 		<div class="app--controls start" v-if="this.controlStatus == 'Select A Duration'" @click="selectTimeInterval('B')" >{{ this.controlStatus }}</div>
 		<div class="app--modes" :class="{ 'start' : this.controlStatus == 'Select A Duration' }">
@@ -31,6 +32,7 @@ export default {
 	methods: {
 
 		timerStart(selectedTime) {
+			this.startCountdown()
 			let midPoint = (selectedTime/2).toFixed(2)
 			let i = 0.00
 			let reachedEnd = false
@@ -60,27 +62,41 @@ export default {
 			this.modeB.active = false
 			this.modeC.active = false
 			clearInterval(this.interval)
+			clearInterval(this.countdownInterval)
+			clearInterval(this.countdownBlock)
+			this.countdown.value = null
 			this.clock = null
 			this.controlStatus = 'Select A Duration'
 		},
 
-		timerReset(newCount) {
+		timerReset(newCount, mode) {
 			clearInterval(this.interval)
-			this.clock = 0.00
-			this.timerStart(newCount)
+			clearInterval(this.countdownInterval)
+			clearInterval(this.countdownBlock)
+			this.clock = 0.00.toFixed(2)
+			this.countdown.value = null
+
+			if (newCount != undefined) {
+				this.countdown.value = 3
+				this.startCountdown()
+				this.countdownBlock = setTimeout(() => {
+					this.timerStart(newCount)
+					clearInterval(this.countdownBlock)
+					this.countdown.active = false
+					mode.active = true
+				}, 4500)
+			}
 		},
 
 		selectTimeInterval(selection) {
 			this.controlStatus = 'Reset'
-
 			if (selection == 'A') {
 				this.modeA.active = false
 				this.modeB.active = false
 				this.modeC.active = false
 				setInterval(() => {
 				}, 100)
-				this.timerReset(10)
-				this.modeA.active = true
+				this.timerReset(10, this.modeA)
 
 			} else if (selection == 'B') {
 				this.modeA.active = false
@@ -88,8 +104,7 @@ export default {
 				this.modeC.active = false
 				setInterval(() => {
 				}, 100)
-				this.timerReset(11)
-				this.modeB.active = true
+				this.timerReset(11, this.modeB)
 
 			} else if (selection == 'C') {
 				this.modeA.active = false
@@ -97,9 +112,23 @@ export default {
 				this.modeC.active = false
 				setInterval(() => {
 				}, 100)
-				this.timerReset(12)
-				this.modeC.active = true
+				this.timerReset(12, this.modeC)
 			}
+		},
+
+		startCountdown() {
+			clearInterval(this.countdownInterval)
+			clearInterval(this.countdownBlock)
+			this.countdown.active = true
+			let e = 3
+			this.countdownInterval = setInterval(() => {
+				e -= 1
+				this.countdown.value = e
+				if (e == 0) {
+					clearInterval(this.countdownInterval)
+					this.countdown.active = false
+				}
+			}, 1500)
 		}
 	},
 
@@ -108,6 +137,10 @@ export default {
 			clock: null,
 			controlStatus: 'Select A Duration',
 			breathStatus: '',
+			countdown: {
+				active: false,
+				value: 3
+			},
 			modeA: {
 				active: false
 			},
@@ -175,6 +208,16 @@ export default {
 		padding-left: calc(50% - 25px);
 		padding-top: 26px;
 		font-size: 24px;
+	}
+
+	// App: Coutndown
+	.app--countdown {
+		font-size: 125px;
+		font-weight: bold;
+		text-align: center;
+		top: calc(50% - 200px);
+		color: #116394;
+		position: relative;
 	}
 
 	// App: Bubble
