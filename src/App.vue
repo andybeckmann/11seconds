@@ -218,6 +218,21 @@ export default {
 		top: calc(50% - 200px);
 		color: #116394;
 		position: relative;
+		animation: countdownInitialize .45s linear forwards;
+		opacity: 0;
+		transform: scale(1.4);
+	}
+
+	@keyframes countdownInitialize {
+		0% {
+			opacity: 0;
+			transform: scale(1.4);
+		}
+
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
 	}
 
 	// App: Bubble
