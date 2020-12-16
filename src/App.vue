@@ -34,7 +34,7 @@ export default {
 		timerStart(selectedTime) {
 			this.startCountdown()
 			let midPoint = (selectedTime/2).toFixed(2)
-			let i = 0.00
+			let i = 0.10
 			let reachedEnd = false
 			this.breathStatus = 'Inhale'
 			this.clock = 0.00.toFixed(2)
@@ -198,6 +198,18 @@ export default {
 		max-width: 960px;
 		margin: 0 auto;
 		position: relative;
+		animation: appFadeIn .5s linear forwards;
+		opacity: 0;
+	}
+
+	@keyframes appFadeIn {
+		0% {
+			opacity: 0;
+		}
+
+		100% {
+			opacity: 1;
+		}
 	}
 
 	// App: Clock
