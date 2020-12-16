@@ -132,6 +132,10 @@ export default {
 		}
 	},
 
+	created() {
+		window.onblur = this.timerStop
+	},
+
 	data() {
 		return {
 			clock: null,
