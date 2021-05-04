@@ -1,6 +1,6 @@
 # 11seconds.app
 
-11seconds (11s) is an app for visualizing breathing techniques that can alter how stress affects the human body's biological systems.
+11seconds is an app for visualizing breathing techniques that can alter how stress affects the human body's biological systems.
 
 ## Screenshots
 
