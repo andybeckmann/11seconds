@@ -1,6 +1,6 @@
 # 11seconds.app
 
-11seconds is an app for visualizing breathing techniques that can alter how stress affects the human body's biological systems.
+A breathing pattern visualizer built with Vue
 
 ## Screenshots
 
