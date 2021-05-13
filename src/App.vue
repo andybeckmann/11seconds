@@ -66,6 +66,9 @@ export default {
 			this.modeA.active = false
 			this.modeB.active = false
 			this.modeC.active = false
+			this.modeA.isActive = false
+			this.modeB.isActive = false
+			this.modeC.isActive = false
 			clearInterval(this.interval)
 			clearInterval(this.countdownInterval)
 			clearInterval(this.countdownBlock)
@@ -97,6 +100,8 @@ export default {
 			this.controlStatus = 'Reset'
 			if (selection == 'A') {
 				this.modeA.isActive = true
+				this.modeB.isActive = false
+				this.modeC.isActive = false
 				this.modeA.active = false
 				this.modeB.active = false
 				this.modeC.active = false
@@ -105,6 +110,9 @@ export default {
 				this.timerReset(10, this.modeA)
 
 			} else if (selection == 'B') {
+				this.modeA.isActive = false
+				this.modeB.isActive = true
+				this.modeC.isActive = false
 				this.modeA.active = false
 				this.modeB.active = false
 				this.modeC.active = false
@@ -113,6 +121,9 @@ export default {
 				this.timerReset(11, this.modeB)
 
 			} else if (selection == 'C') {
+				this.modeA.isActive = false
+				this.modeB.isActive = false
+				this.modeC.isActive = true
 				this.modeA.active = false
 				this.modeB.active = false
 				this.modeC.active = false
