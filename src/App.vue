@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" @click="startApp" :class="{ 'loaded' : appStarted }">
 		<div class="app--clock">{{ this.clock }}</div>
 		<div v-if="this.modeA.active == true" class="app--bubble modeA"></div>
 		<div v-if="this.modeB.active == true" class="app--bubble modeB"></div>
@@ -9,9 +9,9 @@
 		<div class="app--controls start" v-if="this.controlStatus == 'Select A Duration'" @click="selectTimeInterval('B')" >{{ this.controlStatus }}</div>
 		<div class="app--modes" :class="{ 'start' : this.controlStatus == 'Select A Duration' }">
 			<ul>
-				<li @click="selectTimeInterval('A')" :class="{ 'active' : modeA.active }">10s</li>
-				<li @click="selectTimeInterval('B')" :class="{ 'active' : modeB.active }">11s</li>
-				<li @click="selectTimeInterval('C')" :class="{ 'active' : modeC.active }">12s</li>
+				<li @click="selectTimeInterval('A')" :class="{ 'active' : modeA.isActive }">10s</li>
+				<li @click="selectTimeInterval('B')" :class="{ 'active' : modeB.isActive }">11s</li>
+				<li @click="selectTimeInterval('C')" :class="{ 'active' : modeC.isActive }">12s</li>
 			</ul>
 		</div>
 		<div v-if="this.modeA.active == true" class="app--timeline-text modeA">{{ this.breathStatus }}</div>
@@ -30,6 +30,11 @@ export default {
 	name: 'App',
 
 	methods: {
+
+		startApp() {
+			this.appStarted = true
+			document.body.className = 'loaded'
+		},
 
 		timerStart(selectedTime) {
 			this.startCountdown()
@@ -91,6 +96,7 @@ export default {
 		selectTimeInterval(selection) {
 			this.controlStatus = 'Reset'
 			if (selection == 'A') {
+				this.modeA.isActive = true
 				this.modeA.active = false
 				this.modeB.active = false
 				this.modeC.active = false
@@ -138,6 +144,7 @@ export default {
 
 	data() {
 		return {
+			appStarted: false,
 			clock: null,
 			controlStatus: 'Select A Duration',
 			breathStatus: '',
@@ -146,13 +153,16 @@ export default {
 				value: 3
 			},
 			modeA: {
-				active: false
+				active: false,
+				isActive: false
 			},
 			modeB: {
-				active: false
+				active: false,
+				isActive: false
 			},
 			modeC: {
-				active: false
+				active: false,
+				isActive: false
 			}
 		}
 	}
@@ -192,7 +202,10 @@ export default {
 		font-family: 'Montserrat-Light', sans-serif;
 		padding: 0;
 		margin: 0;
-		background: #effbff;
+		
+		&.loaded {
+			background: #effbff;
+		}
 	}
 
 	// App
@@ -202,8 +215,17 @@ export default {
 		max-width: 960px;
 		margin: 0 auto;
 		position: relative;
-		animation: appFadeIn .5s linear forwards;
+		animation: appFadeIn 1 linear forwards;
 		opacity: 0;
+
+		&.loaded {
+			.app--clock {
+				background: #00ffaf;
+			}
+			.app--timeline-bar {
+				background: #116394;
+			}
+		}
 	}
 
 	@keyframes appFadeIn {
@@ -218,12 +240,12 @@ export default {
 
 	// App: Clock
 	.app--clock {
-		background: #00ffaf;
 		height: 80px;
 		color: #074367;
 		padding-left: calc(50% - 25px);
 		padding-top: 26px;
 		font-size: 24px;
+		transition: 1s ease all;
 	}
 
 	// App: Coutndown
@@ -354,6 +376,7 @@ export default {
 		bottom: 185px;
 		left: 0;
 		cursor: pointer;
+		transition: .5s ease bottom;
 
 		&.start {
 			bottom: 60vh;
@@ -370,6 +393,7 @@ export default {
 		width: calc(100% - 50px);
 		background: #effbff;
 		border-radius: 25px;
+		transition: .5s ease bottom;
 
 		&.start {
 			bottom: 40vh;
@@ -415,10 +439,10 @@ export default {
 	.app--timeline-bar {
 		width: 100%;
 		height: 15px;
-		background: #116394;
 		position: absolute;
 		bottom: 0;
 		left: 0;
+		transition: 1s ease background;
 
 		.app--timeline-bar-indicator {
 			background: #00ffaf;
